@@ -1,7 +1,9 @@
 // Author: Siim Sepp
 // Github repo: https://github.com/siimsepp/vscode_snippetmaker.git
 
-document.getElementById('nupp').addEventListener('click', generateSnippet);
+const nupp = document.getElementById('nupp');
+
+nupp.addEventListener('click', generateSnippet);
 
 function generateSnippet(e) {
     // e.preventDefault();
@@ -32,6 +34,7 @@ function generateSnippet(e) {
     snippetCopy = snippet.replaceAll('&#160;', ' ');
     snippetCopy = snippetCopy.replaceAll('<br>', '\n');
 
+    nupp.disabled = true;
     document.querySelector('#kopeeri').style.visibility = 'visible';
 
     document.getElementById('kopeeri').addEventListener('click', e => {
