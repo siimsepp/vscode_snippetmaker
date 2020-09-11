@@ -6,22 +6,21 @@ const nupp = document.getElementById('nupp');
 nupp.addEventListener('click', generateSnippet);
 
 function generateSnippet(e) {
-    // e.preventDefault();
-    const prefix = document.getElementById('prefix').value;
-    const description = document.getElementById('description').value;
-    const code = document.getElementById('code-textarea').value;
+    const prefix = document.getElementById('prefix');
+    const description = document.getElementById('description');
+    const code = document.getElementById('code-textarea');
 
-    const codeLinesArr = code.split('\n');
+    const codeLinesArr = code.value.split('\n');
 
     let snippet = '';
-    snippet += `"${prefix}": {<br>`;
-    snippet += `&#160;&#160;"prefix": "${prefix}",<br>`;
+    snippet += `"${prefix.value}": {<br>`;
+    snippet += `&#160;&#160;"prefix": "${prefix.value}",<br>`;
     snippet += `&#160;&#160;"body": [<br>`;
     codeLinesArr.forEach(line => {
         snippet += `&#160;&#160;&#160;&#160;"${line}",<br>`;
     });
     snippet += `&#160;&#160;],<br>`;
-    snippet += `&#160;&#160;"description": "${description}"<br>`;
+    snippet += `&#160;&#160;"description": "${description.value}"<br>`;
     snippet += `},`;
 
     // See on vajalik, sest snippetites käsitletakse tähendusega $ erisümbolina. $ asemel peab olema \\$.
@@ -34,7 +33,9 @@ function generateSnippet(e) {
     snippetCopy = snippet.replaceAll('&#160;', ' ');
     snippetCopy = snippetCopy.replaceAll('<br>', '\n');
 
-    nupp.disabled = true;
+    prefix.value = '';
+    description.value = '';
+    code.value = '';
     document.querySelector('#kopeeri').style.visibility = 'visible';
 
     document.getElementById('kopeeri').addEventListener('click', e => {
